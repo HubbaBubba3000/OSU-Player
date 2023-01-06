@@ -1,0 +1,88 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPFZIP">
+
+    <Color x:Key="c1">#1A1A2E</Color>
+    <Color x:Key="c2">#16213E</Color>
+    <Color x:Key="c3">#0F3460</Color>
+    <Color x:Key="c4">#E94560</Color>
+
+    <SolidColorBrush Color="{StaticResource c1}" x:Key="b1" />
+    <SolidColorBrush Color="{StaticResource c2}" x:Key="b2" />
+    <SolidColorBrush Color="{StaticResource c3}" x:Key="b3" />
+    <SolidColorBrush Color="{StaticResource c4}" x:Key="b4" />
+
+    <Geometry x:Key="ExitIcon">M36.22,0C16.212,0,0,16.216,0,36.227c0,19.999,16.212,36.214,36.22,36.214
+	c20.011,0,36.214-16.215,36.214-36.214C72.434,16.215,56.231,0,36.22,0z M52.058,46.82c1.379,1.424,0.953,4.078-0.959,5.932
+	c-1.911,1.854-4.577,2.209-5.959,0.785l-9.027-9.295l-9.298,9.027c-1.421,1.379-4.075,0.947-5.929-0.961s-2.206-4.574-0.785-5.956
+	l9.298-9.027l-9.027-9.298c-1.379-1.421-0.946-4.078,0.962-5.932c1.905-1.851,4.577-2.204,5.953-0.785l9.027,9.297l9.301-9.023
+	c1.424-1.382,4.078-0.95,5.929,0.958c1.857,1.908,2.206,4.577,0.785,5.959l-9.295,9.024L52.058,46.82z</Geometry>
+    <Geometry x:Key="PlayIcon" >M12.5,0A12.5,12.5,0,1,0,25,12.5,12.52,12.52,0,0,0,12.5,0Zm5.26,12.92-8,5A.56.56,0,0,1,9.5,18a.5.5,0,0,1-.24-.06A.51.51,0,0,1,9,17.5V7.5a.51.51,0,0,1,.26-.44.49.49,0,0,1,.51,0l8,5a.49.49,0,0,1,0,.84Z </Geometry>
+    <Geometry x:Key="PrevIcon" >M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14S23.7,2,16,2z M18.7,19.5c0.4,0.4,0.4,1,0,1.4c-0.2,0.2-0.5,0.3-0.7,0.3
+	s-0.5-0.1-0.7-0.3l-4.2-4.2c-0.4-0.4-0.4-1,0-1.4l4.2-4.2c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L15.2,16L18.7,19.5z</Geometry>
+    <Geometry x:Key="NextIcon" >M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14S23.7,2,16,2z M18.9,16.7l-4.2,4.2c-0.2,0.2-0.5,0.3-0.7,0.3
+	s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l3.5-3.5l-3.5-3.5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l4.2,4.2C19.3,15.7,19.3,16.3,18.9,16.7z </Geometry>
+
+    <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="20" Name="_Border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0"
+                            Background="{StaticResource b2}"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}" >
+                        <ContentControl Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="_Border" Property="Background" Value="{StaticResource b4}"/>
+                            <Setter Property="Path.Fill" Value="{StaticResource b4}"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{StaticResource b4}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="fonts/#Catchy Melody"/>
+    </Style>
+
+    <Style x:Key="ListBoxStyle" TargetType="ListBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource b3}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Name="_Border"
+                            Padding="0,1,0,1"
+                            SnapsToDevicePixels="true"
+                            BorderThickness="0"
+                            CornerRadius="5" >
+                        <ContentPresenter/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="_Border" Property="Background" Value="{StaticResource b3}"/>
+                            <Setter Property="Foreground" Value="{StaticResource b4}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="_Border" Property="Background" Value="{StaticResource b3}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
