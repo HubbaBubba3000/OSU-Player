@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="fonts/Catchy Melody.ttf">
+    <Content Include="fonts/Aller.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>  
     </Content>
   </ItemGroup>

@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WPFZIP">
 
+    
+
     <Color x:Key="c1">#1A1A2E</Color>
     <Color x:Key="c2">#16213E</Color>
     <Color x:Key="c3">#0F3460</Color>
@@ -22,6 +24,7 @@
 	s-0.5-0.1-0.7-0.3l-4.2-4.2c-0.4-0.4-0.4-1,0-1.4l4.2-4.2c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L15.2,16L18.7,19.5z</Geometry>
     <Geometry x:Key="NextIcon" >M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14S23.7,2,16,2z M18.9,16.7l-4.2,4.2c-0.2,0.2-0.5,0.3-0.7,0.3
 	s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l3.5-3.5l-3.5-3.5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l4.2,4.2C19.3,15.7,19.3,16.3,18.9,16.7z </Geometry>
+    <Geometry x:Key="PauseIcon">M61.44,0c33.93,0,61.44,27.51,61.44,61.44c0,33.93-27.51,61.44-61.44,61.44S0,95.37,0,61.44 C0,27.51,27.51,0,61.44,0L61.44,0z M68.16,33.88H84.1V89l-15.94,0V33.88L68.16,33.88L68.16,33.88z M38.78,33.88h15.94V89l-15.94,0 V33.88L38.78,33.88L38.78,33.88z</Geometry>
 
     <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -48,19 +51,45 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
+    </Style>
+    <Style x:Key="PlayStyle" TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="25" Name="_Border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0"
+                            Background="{StaticResource b2}"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}" >
+                        <ContentControl Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="_Border" Property="Background" Value="{StaticResource b4}"/>
+                            <Setter Property="Path.Fill" Value="{StaticResource b4}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Path.Data" Value="{StaticResource PauseIcon}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{StaticResource b4}" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="fonts/#Catchy Melody"/>
+        <Setter Property="FontFamily" Value="fonts/#Aller"/>
     </Style>
 
     <Style x:Key="ListBoxStyle" TargetType="ListBoxItem">
         <Setter Property="Foreground" Value="{StaticResource b3}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">

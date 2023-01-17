@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:OSU_Player.ViewModel"
         xmlns:local="clr-namespace:OSU_Player"
         mc:Ignorable="d"
         WindowStyle="None"
@@ -12,6 +13,9 @@
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml" />
     </Window.Resources>
+    <Window.DataContext> 
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Border CornerRadius="15" Background="{StaticResource b1}" MouseDown="WindowMove" >
         <Grid>
             <Grid.RowDefinitions>
@@ -19,19 +23,43 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="0.3*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <Label HorizontalAlignment="Left" Style="{StaticResource LabelStyle}"
-                   Grid.Row="0" Margin="5,0,0,0" Content="OSU!Player - v.O b" />
+            <Label HorizontalAlignment="Left" Style="{StaticResource LabelStyle}" Grid.ColumnSpan="2"
+                   Grid.Row="0" Margin="5,0,0,0" Content="OSU!Player - v.Ob" />
 
-            <Button Grid.Row="0" Click="WindowClose"
-                    HorizontalAlignment="Right" Margin="0,3,5,3" 
+            <Button Grid.Row="0" Click="WindowClose" Grid.Column="2"
+                    HorizontalAlignment="Right" Margin="0,3,5,3"
                     Width="25" Style="{StaticResource BtnStyle}">
                 <Path Stretch="Fill" Width="20" Height="20" Fill="{StaticResource b3}" Data="{StaticResource ExitIcon}" />
             </Button>
             
             <ListBox Name="Playlist" Grid.Row="1" Background="{StaticResource b2}"
-                     Foreground="{StaticResource b3}"
+                     Foreground="{StaticResource b3}" Grid.ColumnSpan="3"
+                     ItemsSource="{Binding Playlist}" SelectedIndex="{Binding SelectedIndex}"
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      ItemContainerStyle="{StaticResource ListBoxStyle}"/>
+
+            <Button HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"
+                    Style="{StaticResource PlayStyle}" VerticalAlignment="Center"
+                    Width="50" Height="50" Command="{Binding PlaySound, UpdateSourceTrigger=PropertyChanged}">
+                <Path Width="45" Height="45" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
+            </Button>
+            <Button HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
+                    Style="{StaticResource BtnStyle}" VerticalAlignment="Center"
+                    Width="40" Height="40" Command="{Binding PrevSound, UpdateSourceTrigger=PropertyChanged}">
+                <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
+            </Button>
+            <Button HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2"
+                    Style="{StaticResource BtnStyle}" VerticalAlignment="Center"
+                    Width="40" Height="40" Command="{Binding NextSound, UpdateSourceTrigger=PropertyChanged}">
+                <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource NextIcon}"/>
+            </Button>
 
         </Grid> 
     </Border>
