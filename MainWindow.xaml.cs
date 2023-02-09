@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using System.IO;
+using System.Diagnostics;
 
 namespace OSU_Player
 {
@@ -10,9 +9,11 @@ namespace OSU_Player
     {
         public MainWindow()
         {
+            var start = new Stopwatch();
+            start.Start();
             InitializeComponent();
+            Console.WriteLine(start.ElapsedMilliseconds);
         }
-
         public void WindowMove(Object sender, MouseEventArgs a) 
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)

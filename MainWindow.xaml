@@ -16,7 +16,18 @@
     <Window.DataContext> 
         <vm:MainViewModel/>
     </Window.DataContext>
-    <Border CornerRadius="15" Background="{StaticResource b1}" MouseDown="WindowMove" >
+    <Border CornerRadius="15" MouseDown="WindowMove">
+        <Border.Background>
+            <ImageBrush ImageSource="{Binding BG, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+        </Border.Background>
+    <Border CornerRadius="15" Padding = "5" >
+         <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#F01A1A2E" Offset="0.85" />
+                <GradientStop Color="#001A1A2E" Offset="0.5" />
+                <GradientStop Color="#F01A1A2E" Offset="0.15" />
+            </LinearGradientBrush>
+        </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -33,34 +44,49 @@
                    Grid.Row="0" Margin="5,0,0,0" Content="OSU!Player - v.Ob" />
 
             <Button Grid.Row="0" Click="WindowClose" Grid.Column="2"
-                    HorizontalAlignment="Right" Margin="0,3,5,3"
+                    HorizontalAlignment="Right" Margin="0,3,0,3"
                     Width="25" Style="{StaticResource BtnStyle}">
                 <Path Stretch="Fill" Width="20" Height="20" Fill="{StaticResource b3}" Data="{StaticResource ExitIcon}" />
             </Button>
             
-            <ListBox Name="Playlist" Grid.Row="1" Background="{StaticResource b2}"
-                     Foreground="{StaticResource b3}" Grid.ColumnSpan="3"
+            <ListBox Name="Playlist" Grid.Row="1" Background="Transparent"
+                     Foreground="{StaticResource b3}" Grid.ColumnSpan="3" 
                      ItemsSource="{Binding Playlist}" SelectedIndex="{Binding SelectedIndex}"
                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      ItemContainerStyle="{StaticResource ListBoxStyle}"/>
 
-            <Button HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"
+            <Slider Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="10,10,10,0"
+                    Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SliderStyle}"
+                    Maximum="{Binding Player.Duration, UpdateSourceTrigger=PropertyChanged}"
+                    IsEnabled="{Binding Player.IsPlay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,15,0,0"
                     Style="{StaticResource PlayStyle}" VerticalAlignment="Center"
                     Width="50" Height="50" Command="{Binding PlaySound, UpdateSourceTrigger=PropertyChanged}">
                 <Path Width="45" Height="45" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
             </Button>
-            <Button HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2"
+            <Button HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Margin="0,15,0,0"
                     Style="{StaticResource BtnStyle}" VerticalAlignment="Center"
                     Width="40" Height="40" Command="{Binding PrevSound, UpdateSourceTrigger=PropertyChanged}">
                 <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
             </Button>
-            <Button HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2"
+            <Button HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" Margin="0,15,0,0"
                     Style="{StaticResource BtnStyle}" VerticalAlignment="Center"
                     Width="40" Height="40" Command="{Binding NextSound, UpdateSourceTrigger=PropertyChanged}">
                 <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource NextIcon}"/>
             </Button>
+            <Slider Orientation="Vertical" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource SliderStyle}"
+                    Maximum="1" Minimum="0" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Margin="0,20,0,20" />
+            <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,20,0,0" Style="{StaticResource LabelStyle}" 
+                    Content="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Command="{Binding Mute, UpdateSourceTrigger=PropertyChanged}" 
+                    Width="20" Height="20" Style="{StaticResource BtnStyle}" >
+                <Path Width="15" Height="15" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource VolumeIcon}" />
+            </Button>
 
         </Grid> 
+    </Border>
     </Border>
 </Window>

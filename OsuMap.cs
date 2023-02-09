@@ -11,7 +11,7 @@ namespace OSU_Player
         public string Title {get => Parse("Title");}
         public string Artist {get => Parse("Artist");}
         public string Audio {get => Parse("AudioFilename");}
-        public string Background {get => Directory.GetFiles(dir, "*.png")[0];}
+        public string Background {get => GetBG();}
         public string Parse(string p) {
             var file = Directory.EnumerateFiles(dir, "*.osu", 0).ElementAt(0);
             ReadOnlySpan<char> line;
@@ -27,6 +27,15 @@ namespace OSU_Player
                 }
                 return "err";
             }
+        }
+        private string GetBG() {
+            string[] filters = new String[] { "*.jpg", "*.jpeg", "*.png", "*.gif", "*.tiff", "*.bmp", "*.svg" };
+            foreach (string filt in filters)
+            {
+                if (Directory.GetFiles(dir,filt).Length > 0) 
+                    return Directory.EnumerateFiles(dir,filt).ElementAt(0);
+            }
+            return string.Empty;
         }
         public OsuMap(string dir) {
             this.dir = dir;

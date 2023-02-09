@@ -1,5 +1,9 @@
 using System.ComponentModel;
 using System.IO;
+using System;
+using System.Timers;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Input;
 
 namespace OSU_Player.ViewModel
@@ -16,13 +20,36 @@ namespace OSU_Player.ViewModel
     {
        #region properties
         string path = "D:/OSU!/Songs/";
+        public Sound Player;
         private int _SelectedIndex;
+        private BitmapImage _BG;
+
+        public string Duration {
+            get {return Player.Duration.ToString();}
+        }
+        public BitmapImage BG {
+            get { return _BG; }
+            set { _BG = value; OnPropertyChanged("BG");}
+        }
+        public double Volume {
+            get { return Player.Volume;}
+            set { Player.Volume = value; OnPropertyChanged("VolumeChange");}
+        }  
         public int SelectedIndex {
             get {return _SelectedIndex;} 
-            set
-            {
+            set {
                 _SelectedIndex = value;
+                Player.IsPlay = false;
+                BG = GetBG();
+                Player.Open(GetAudio(SelectedIndex));
                 OnPropertyChanged("SelectedIndex");
+            }
+        }
+        public double Time {
+            get {return Player.Time;}
+            set {
+                Player.Time = value; 
+                OnPropertyChanged("SliderValue");
             }
         }
         public string[] Playlist
@@ -33,9 +60,10 @@ namespace OSU_Player.ViewModel
         {
             string[] list = new string[Directory.GetDirectories(path).Length];
             int i = 0;
+            OsuMap m = new OsuMap("");
             foreach (string dir in Directory.GetDirectories(path))
             {
-                OsuMap m = new OsuMap(dir);
+                m.dir = dir;
                 list[i] = (m.Artist + " - " + m.Title);
                 i++;
             }
@@ -44,13 +72,18 @@ namespace OSU_Player.ViewModel
         private string GetAudio(int index) 
         {
             OsuMap m = new OsuMap(Directory.GetDirectories(path)[index]);
-            return m.dir + "/" + m.Audio.Replace(" ", string.Empty);
-            
+            return m.dir + "/" + m.Audio.Replace(" ", string.Empty);   
+        }
+        public BitmapImage GetBG() 
+        {
+            OsuMap m = new OsuMap(Directory.GetDirectories(path)[SelectedIndex]);
+            return new BitmapImage(new System.Uri(m.Background)); 
         }
         private int PlaylistLenght() {return Directory.GetDirectories(path).Length;}
         private void Playsound() {
-            var player = new Sound(GetAudio(SelectedIndex));
-            player.play();
+            if (Player.IsPlay)
+                Player.pause();
+            else Player.play();
         }
 
         #endregion
@@ -58,12 +91,12 @@ namespace OSU_Player.ViewModel
         #region commands
         public ICommand PrevSound {
             get {
-                return new DelegateCommand((obj) => { SelectedIndex--; }, (obj) => SelectedIndex > 0 );
+                return new DelegateCommand((obj) => { SelectedIndex--; Playsound(); }, (obj) => SelectedIndex > 0 );
             }
         } 
         public ICommand NextSound {
             get {
-                return new DelegateCommand((obj) => { SelectedIndex++; }, (obj) => SelectedIndex < PlaylistLenght()-1 );
+                return new DelegateCommand((obj) => { SelectedIndex++; Playsound(); }, (obj) => SelectedIndex < PlaylistLenght()-1 );
             }
         } 
         public ICommand PlaySound {
@@ -71,9 +104,18 @@ namespace OSU_Player.ViewModel
                 return new DelegateCommand((obj) => { Playsound(); } );
             }
         } 
+        public ICommand Mute {
+            get {
+                return new DelegateCommand((obj) => { Player.IsMuted = !Player.IsMuted;}); 
+            }
+        }
 
         #endregion
         public MainViewModel() {
+            Player = new Sound();
+            BG = GetBG();
+            Player.Open(GetAudio(SelectedIndex));
+            Player.Volume = 0.5;
         }
         
     }
