@@ -1,27 +1,30 @@
-using System.Runtime.InteropServices;
-using System.Timers;
 using System;
 using System.Windows.Media;
+
 namespace OSU_Player.ViewModel
 {
     public class Sound {
         private MediaPlayer mediaPlayer;
         public bool IsPlay = false;
         private bool IsOpen = false;
-        private double _Duration;
-        Timer t;
-        string path;
+        private TimeSpan _Duration;
+        string path = "";
         public Sound()
         {
-            mediaPlayer = new MediaPlayer();   
+            mediaPlayer = new MediaPlayer(); 
+            mediaPlayer.MediaOpened += new EventHandler(OnOpen);  
         }
-        public double Duration {
-            get { 
-                return _Duration;
-            }
-            set {
-                _Duration = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-            }
+        public TimeSpan Duration {
+            get {return _Duration;}
+        }
+        public void AddOnOpen(EventHandler e) {
+            mediaPlayer.MediaOpened += e;
+        }
+        public void AddOnEnd(EventHandler e) {
+            mediaPlayer.MediaEnded += e;
+        }
+         private void OnOpen(object? sender, EventArgs e) {
+            _Duration = mediaPlayer.NaturalDuration.TimeSpan;
         }
         public bool IsMuted {
             get { return mediaPlayer.IsMuted;}
@@ -40,12 +43,10 @@ namespace OSU_Player.ViewModel
             path = File;
             IsOpen = true;
         }
-        public void getpos(object sender, EventArgs e) {
-            Console.WriteLine(mediaPlayer.Position);
-        }
         public void play()
         {
             IsPlay = true;
+            mediaPlayer.Close();
             mediaPlayer.Open(new System.Uri(path));
             mediaPlayer.Play();
         }

@@ -56,9 +56,9 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      ItemContainerStyle="{StaticResource ListBoxStyle}"/>
 
-            <Slider Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="10,10,10,0"
-                    Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SliderStyle}"
-                    Maximum="{Binding Player.Duration, UpdateSourceTrigger=PropertyChanged}"
+            <Slider Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Top" Style="{StaticResource SliderStyle}"
+                    Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,10,0"
+                    Maximum="{Binding Duration.TotalSeconds, UpdateSourceTrigger=PropertyChanged}" x:Name="track"
                     IsEnabled="{Binding Player.IsPlay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,15,0,0"
@@ -67,7 +67,7 @@
                 <Path Width="45" Height="45" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
             </Button>
             <Button HorizontalAlignment="Right" Grid.Column="0" Grid.Row="2" Margin="0,15,0,0"
-                    Style="{StaticResource BtnStyle}" VerticalAlignment="Center"
+                    Style="{StaticResource BtnStyle}" VerticalAlignment="Center" 
                     Width="40" Height="40" Command="{Binding PrevSound, UpdateSourceTrigger=PropertyChanged}">
                 <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
             </Button>
@@ -78,8 +78,8 @@
             </Button>
             <Slider Orientation="Vertical" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource SliderStyle}"
                     Maximum="1" Minimum="0" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Margin="0,20,0,20" />
-            <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,20,0,0" Style="{StaticResource LabelStyle}" 
-                    Content="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
+                    Text="{Binding Duration,StringFormat={}{0:mm':'ss}, UpdateSourceTrigger=PropertyChanged}" />
             <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     Command="{Binding Mute, UpdateSourceTrigger=PropertyChanged}" 
                     Width="20" Height="20" Style="{StaticResource BtnStyle}" >

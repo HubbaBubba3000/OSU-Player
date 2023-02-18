@@ -122,5 +122,10 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontFamily" Value="./fonts/#Aller"/>
     </Style>
+    <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource b4}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="./fonts/#Aller"/>
+    </Style>
 
 </ResourceDictionary>

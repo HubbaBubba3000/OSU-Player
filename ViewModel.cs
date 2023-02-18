@@ -1,16 +1,16 @@
-using System.ComponentModel;
-using System.IO;
-using System;
-using System.Timers;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
 using System.Windows.Input;
+using System.Windows.Threading;
+using System.IO;
+using OSU_Player.Json;
+using System;
 
 namespace OSU_Player.ViewModel
 {
     public class BaseVM : INotifyPropertyChanged 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -19,14 +19,12 @@ namespace OSU_Player.ViewModel
     public class MainViewModel : BaseVM
     {
        #region properties
-        string path = "D:/OSU!/Songs/";
+        Config? c;
+        string path = "";
         public Sound Player;
         private int _SelectedIndex;
-        private BitmapImage _BG;
-
-        public string Duration {
-            get {return Player.Duration.ToString();}
-        }
+        private BitmapImage _BG = new BitmapImage();
+        DispatcherTimer t = new DispatcherTimer();
         public BitmapImage BG {
             get { return _BG; }
             set { _BG = value; OnPropertyChanged("BG");}
@@ -35,6 +33,10 @@ namespace OSU_Player.ViewModel
             get { return Player.Volume;}
             set { Player.Volume = value; OnPropertyChanged("VolumeChange");}
         }  
+        public TimeSpan Duration {
+            get {return Player.Duration;}
+            set {OnPropertyChanged("duration");}
+        }
         public int SelectedIndex {
             get {return _SelectedIndex;} 
             set {
@@ -81,9 +83,27 @@ namespace OSU_Player.ViewModel
         }
         private int PlaylistLenght() {return Directory.GetDirectories(path).Length;}
         private void Playsound() {
-            if (Player.IsPlay)
+            if (Player.IsPlay) {
                 Player.pause();
-            else Player.play();
+                t.Stop();
+            }
+            else {
+                Player.play();
+                Time = 0;
+                t.Start();
+            } 
+                
+        }
+        private void DurSet(object? sender, EventArgs? e) {
+            Duration = TimeSpan.Zero;
+        }
+        private void mediaEnd(object? sender, EventArgs? e) {
+            SelectedIndex++;
+            Playsound();
+        }
+        private void timerElapse(object? sender, EventArgs? e) {
+            Time+=0;
+            Console.WriteLine(Time);
         }
 
         #endregion
@@ -113,9 +133,15 @@ namespace OSU_Player.ViewModel
         #endregion
         public MainViewModel() {
             Player = new Sound();
+            c = JsonReader.Read("Config.json");
+            Volume = c.Volume;
+            path = c.Path;
             BG = GetBG();
+            t.Tick += new EventHandler(timerElapse);
+            t.Interval = TimeSpan.FromSeconds(1);
             Player.Open(GetAudio(SelectedIndex));
-            Player.Volume = 0.5;
+            Player.AddOnOpen(new System.EventHandler(DurSet));
+            Player.AddOnEnd(new System.EventHandler(mediaEnd));
         }
         
     }
