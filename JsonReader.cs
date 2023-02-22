@@ -13,10 +13,6 @@ namespace OSU_Player.Json {
         }
     }
     class Config {
-        public string C1 { get;set;}= "";
-        public string C2 { get;set;}= "";
-        public string C3 { get;set;}= "";
-        public string C4 { get;set;}= "";
         public string Path { get;set;}= "";
         public double Volume { get;set;}
 

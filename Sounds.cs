@@ -7,13 +7,15 @@ namespace OSU_Player.ViewModel
         private MediaPlayer mediaPlayer;
         public bool IsPlay = false;
         private bool IsOpen = false;
+        public bool IsSelect = false;
         private TimeSpan _Duration;
-        string path = "";
+        public string path = "";
         public Sound()
         {
             mediaPlayer = new MediaPlayer(); 
             mediaPlayer.MediaOpened += new EventHandler(OnOpen);  
         }
+
         public TimeSpan Duration {
             get {return _Duration;}
         }
@@ -34,23 +36,24 @@ namespace OSU_Player.ViewModel
             get { return mediaPlayer.Volume;}
             set { mediaPlayer.Volume = value;}
         }
-        public double Time {
-            get { return mediaPlayer.Position.TotalSeconds;}
-            set { mediaPlayer.Position = TimeSpan.FromSeconds(value);}
+        public TimeSpan Time {
+            get { return mediaPlayer.Position;}
+            set { mediaPlayer.Position = value;}
         }
-        public void Open(string File) 
+        public void Open() 
         {
-            path = File;
-            IsOpen = true;
-        }
-        public void play()
-        {
-            IsPlay = true;
             mediaPlayer.Close();
             mediaPlayer.Open(new System.Uri(path));
+            IsSelect = false;
+            IsPlay = false;
+        }
+        public void Play()
+        {
+            IsPlay = true;
+            Volume = Volume;
             mediaPlayer.Play();
         }
-        public void pause()
+        public void Pause()
         {
             IsPlay = false;
             mediaPlayer.Pause();

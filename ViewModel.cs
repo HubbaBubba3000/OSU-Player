@@ -41,17 +41,10 @@ namespace OSU_Player.ViewModel
             get {return _SelectedIndex;} 
             set {
                 _SelectedIndex = value;
-                Player.IsPlay = false;
+                Player.IsSelect = true;
                 BG = GetBG();
-                Player.Open(GetAudio(SelectedIndex));
+                Player.path = GetAudio(_SelectedIndex);
                 OnPropertyChanged("SelectedIndex");
-            }
-        }
-        public double Time {
-            get {return Player.Time;}
-            set {
-                Player.Time = value; 
-                OnPropertyChanged("SliderValue");
             }
         }
         public string[] Playlist
@@ -82,30 +75,44 @@ namespace OSU_Player.ViewModel
             return new BitmapImage(new System.Uri(m.Background)); 
         }
         private int PlaylistLenght() {return Directory.GetDirectories(path).Length;}
-        private void Playsound() {
-            if (Player.IsPlay) {
-                Player.pause();
-                t.Stop();
+
+        public double Time {
+            get {
+                return Player.Time.TotalSeconds;
             }
-            else {
-                Player.play();
-                Time = 0;
-                t.Start();
-            } 
-                
+            set {
+                Player.Time = TimeSpan.FromSeconds(value);
+                timex = TimeSpan.Zero;
+                OnPropertyChanged("SliderValue");
+            }
+        }
+        public TimeSpan timex {
+            get {return Player.Time;}
+            set {OnPropertyChanged("");}
+        }
+
+        private void Playsound() {
+            if (Player.IsSelect) {
+                Player.Open();
+                Volume = c.Volume;
+            }
+            
+            if (Player.IsPlay) 
+                Player.Pause();
+            else 
+                Player.Play();
         }
         private void DurSet(object? sender, EventArgs? e) {
             Duration = TimeSpan.Zero;
+        }
+        private void TimeTick(object? sender, EventArgs? e) {
+            Time = Time;
+            timex = timex;
         }
         private void mediaEnd(object? sender, EventArgs? e) {
             SelectedIndex++;
             Playsound();
         }
-        private void timerElapse(object? sender, EventArgs? e) {
-            Time+=0;
-            Console.WriteLine(Time);
-        }
-
         #endregion
 
         #region commands
@@ -134,15 +141,11 @@ namespace OSU_Player.ViewModel
         public MainViewModel() {
             Player = new Sound();
             c = JsonReader.Read("Config.json");
-            Volume = c.Volume;
+            t = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal,new EventHandler(TimeTick), Dispatcher.CurrentDispatcher);
             path = c.Path;
             BG = GetBG();
-            t.Tick += new EventHandler(timerElapse);
-            t.Interval = TimeSpan.FromSeconds(1);
-            Player.Open(GetAudio(SelectedIndex));
             Player.AddOnOpen(new System.EventHandler(DurSet));
             Player.AddOnEnd(new System.EventHandler(mediaEnd));
         }
-        
     }
 }

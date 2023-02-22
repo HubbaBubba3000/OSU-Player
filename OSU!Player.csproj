@@ -6,10 +6,15 @@
     <RootNamespace>OSU_Player</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
-     <Content Include=".\fonts\Aller.ttf">
+     <Content Include=".\fonts\TorusPro.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </Content>
+     <Content Include=".\fonts\TorusPror.ttf">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
      </Content>
   </ItemGroup>

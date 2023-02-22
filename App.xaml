@@ -8,7 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style.xaml" />
                 <ResourceDictionary>
-                    <FontFamily x:Key="Aller">.\fonts\#Aller</FontFamily>
+                    <FontFamily x:Key="Torus">.\fonts\#Torus Pro SemiBold</FontFamily>
+                    <FontFamily x:Key="Torus-r">.\fonts\#Torus Pro </FontFamily>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

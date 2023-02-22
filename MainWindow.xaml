@@ -49,7 +49,7 @@
                 <Path Stretch="Fill" Width="20" Height="20" Fill="{StaticResource b3}" Data="{StaticResource ExitIcon}" />
             </Button>
             
-            <ListBox Name="Playlist" Grid.Row="1" Background="Transparent"
+            <ListBox Name="Playlist" Grid.Row="1" Background="Transparent" BorderThickness="0"
                      Foreground="{StaticResource b3}" Grid.ColumnSpan="3" 
                      ItemsSource="{Binding Playlist}" SelectedIndex="{Binding SelectedIndex}"
                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
@@ -57,7 +57,7 @@
                      ItemContainerStyle="{StaticResource ListBoxStyle}"/>
 
             <Slider Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Top" Style="{StaticResource SliderStyle}"
-                    Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,10,0"
+                    Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,10,0" 
                     Maximum="{Binding Duration.TotalSeconds, UpdateSourceTrigger=PropertyChanged}" x:Name="track"
                     IsEnabled="{Binding Player.IsPlay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -77,9 +77,11 @@
                 <Path Width="35" Height="35" Stretch="Fill" Fill="{StaticResource b3}" Data="{StaticResource NextIcon}"/>
             </Button>
             <Slider Orientation="Vertical" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource SliderStyle}"
-                    Maximum="1" Minimum="0" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Margin="0,20,0,20" />
+                    Maximum="0.6" Minimum="0" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Margin="2,25,0,20" />
             <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
                     Text="{Binding Duration,StringFormat={}{0:mm':'ss}, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,40,0,0" Style="{StaticResource TextStyle}" 
+                    Text="{Binding timex,StringFormat={}{0:mm':'ss}, UpdateSourceTrigger=PropertyChanged}" />
             <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     Command="{Binding Mute, UpdateSourceTrigger=PropertyChanged}" 
                     Width="20" Height="20" Style="{StaticResource BtnStyle}" >

@@ -10,12 +10,14 @@
     <Color x:Key="c1">#1A1A2E</Color>
     <Color x:Key="c2">#16213E</Color>
     <Color x:Key="c3">#0F3460</Color>
+    <Color x:Key="c5">#104b93</Color>
     <Color x:Key="c4">#E94560</Color>
 
     <SolidColorBrush Color="{StaticResource c1}" x:Key="b1" />
     <SolidColorBrush Color="{StaticResource c2}" x:Key="b2" />
     <SolidColorBrush Color="{StaticResource c3}" x:Key="b3" />
     <SolidColorBrush Color="{StaticResource c4}" x:Key="b4" />
+    <SolidColorBrush Color="{StaticResource c5}" x:Key="b5" />
     <Geometry x:Key="ExitIcon">M36.22,0C16.212,0,0,16.216,0,36.227c0,19.999,16.212,36.214,36.22,36.214
 	c20.011,0,36.214-16.215,36.214-36.214C72.434,16.215,56.231,0,36.22,0z M52.058,46.82c1.379,1.424,0.953,4.078-0.959,5.932
 	c-1.911,1.854-4.577,2.209-5.959,0.785l-9.027-9.295l-9.298,9.027c-1.421,1.379-4.075,0.947-5.929-0.961s-2.206-4.574-0.785-5.956
@@ -92,7 +94,8 @@
     </Style>
 
      <Style x:Key="ListBoxStyle" TargetType="ListBoxItem">
-        <Setter Property="Foreground" Value="{StaticResource b3}"/>
+        <Setter Property="Foreground" Value="{StaticResource b5}"/>
+        <Setter Property="FontFamily" Value="./fonts/TorusPror.ttf#Torus Pro"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -107,9 +110,13 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="_Border" Property="Background" Value="{StaticResource b3}"/>
                             <Setter Property="Foreground" Value="{StaticResource b4}"/>
+                            <Setter Property="FontFamily" Value="./fonts/TorusPro.ttf#Torus Pro SemiBold"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="_Border" Property="Background" Value="{StaticResource b3}"/>
+                            <Setter TargetName="_Border" Property="Opacity" Value="0.8"/>
+                            <Setter Property="Foreground" Value="{StaticResource b4}"/>
+                            <Setter Property="FontFamily" Value="./fonts/TorusPro.ttf#Torus Pro SemiBold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -120,12 +127,12 @@
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{StaticResource b4}" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="./fonts/#Aller"/>
+        <Setter Property="FontFamily" Value="./fonts/TorusPro.ttf#Torus Pro SemiBold"/>
     </Style>
     <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{StaticResource b4}" />
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontFamily" Value="./fonts/#Aller"/>
+        <Setter Property="FontFamily" Value="./fonts/TorusPro.ttf#Torus Pro SemiBold"/>
     </Style>
 
 </ResourceDictionary>
