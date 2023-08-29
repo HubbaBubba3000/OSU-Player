@@ -1,0 +1,16 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:OSU_Player"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <Color x:Key="c1">#dc98a4</Color>
+    <Color x:Key="c2">#c13d50</Color>
+    <Color x:Key="c3">#5c9d9f</Color>
+    <Color x:Key="c4">#35324c</Color>
+    <Color x:Key="c5">#c3cad8</Color>
+
+    <SolidColorBrush Color="#dc98a4" x:Key="b1" options:Freeze="True"/>
+    <SolidColorBrush Color="#c13d50" x:Key="b2" options:Freeze="True"/>
+    <SolidColorBrush Color="#5c9d9f" x:Key="b3" options:Freeze="True"/>
+    <SolidColorBrush Color="#35324c" x:Key="b4" options:Freeze="True"/>
+    <SolidColorBrush Color="#c3cad8" x:Key="b5" options:Freeze="True"/>
+</ResourceDictionary>

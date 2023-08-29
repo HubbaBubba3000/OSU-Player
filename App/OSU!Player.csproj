@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>OSU_Player</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    
+   <Version>0.0.1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Data/Data.csproj" />
+    <ProjectReference Include="../Core/Core.csproj" />
+    <ProjectReference Include="../CrashHandler/CrashHandler.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
+  </ItemGroup>
+</Project>

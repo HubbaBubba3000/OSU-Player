@@ -1,0 +1,26 @@
+<UserControl x:Class="OSU_Player.View.MainPage" 
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:OSU_Player.View" 
+            xmlns:vm="clr-namespace:OSU_Player.ViewModel" 
+            mc:Ignorable="d" d:DesingHeight="400" >
+    <Grid>
+        <ListBox Height="400" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+        ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" 
+        ItemContainerStyle="{StaticResource ItemStyle}" Style="{StaticResource ListStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding Name}" FontSize="18" 
+                            HorizontalAlignment="Left" Margin="0"/>
+                        <Label Content="{Binding Artist}" FontSize="12" 
+                            HorizontalAlignment="Left" Margin="0"/>
+                    </StackPanel> 
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+</UserControl>
