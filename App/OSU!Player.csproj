@@ -15,7 +15,9 @@
     <ProjectReference Include="../CrashHandler/CrashHandler.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
+
+    <!-- idk why i need it -->
+    <!-- <PackageReference Include="DryIoc" Version="5.4.1" /> -->
   </ItemGroup>
 </Project>

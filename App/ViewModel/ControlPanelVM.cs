@@ -2,14 +2,16 @@ using OSU_Player.Core;
 using System.Windows.Input;
 namespace OSU_Player.ViewModel {
     public class ControlPanelVM : BaseVM {
-        CoreBass bass;
-        public ControlPanelVM() {
-            bass = new CoreBass();
+        AudioEngine audioEngine;
+        Player player;
+        public ControlPanelVM(AudioEngine ae, Player player) {
+            audioEngine = ae;
+            this.player = player;
         }
 
-        public ICommand Play {
+        public ICommand TooglePlayAndPause {
             get {
-                return new RelayCommand((obj) => { bass.Run(); });
+                return new RelayCommand((obj) => { player.TooglePlayAndPause(); });
             }
         }
     }

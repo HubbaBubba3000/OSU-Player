@@ -9,6 +9,7 @@
     <Grid>
         <ListBox Height="400" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
         ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" 
+        SelectedItem="{Binding Current, UpdateSourceTrigger=PropertyChanged}"
         ItemContainerStyle="{StaticResource ItemStyle}" Style="{StaticResource ListStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
