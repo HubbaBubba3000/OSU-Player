@@ -1,4 +1,4 @@
-using System;
+
 using OSU_Player.Core;
 using OSU_Player.Data;
 
@@ -8,9 +8,9 @@ namespace OSU_Player.ViewModel {
         public HeaderVM header {get; set;}
         public ControlPanelVM control {get; set;}
         public MainPageVM page {get; set;}
-        public MainWindowVM(DBParser db, AudioEngine ae, Player player) {
+        public MainWindowVM(DBParser db, Player player) {
             header = new HeaderVM();
-            control = new ControlPanelVM(ae, player);
+            control = new ControlPanelVM(player);
             page = new MainPageVM(db, player);
 
         }

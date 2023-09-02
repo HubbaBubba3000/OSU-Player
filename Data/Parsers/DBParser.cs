@@ -5,8 +5,8 @@ namespace OSU_Player.Data {
     public class DBParser : IDisposable{
         OsuDb osuDb;
         readonly string path;
-        public DBParser(string path) {
-            this.path = path;
+        public DBParser() {
+            this.path = DefaultConfig.Default.OsuFolder;
             osuDb = OsuDb.ReadFromFile(path + "/osu!.db");
         }
         

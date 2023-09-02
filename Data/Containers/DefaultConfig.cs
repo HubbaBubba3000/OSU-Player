@@ -8,7 +8,7 @@ namespace OSU_Player.Data {
 
         public static DefaultConfig Default => new DefaultConfig() {
             OsuFolder = "D:/osu!",
-            Volume = 1
+            Volume = 0.5
         };
     }
 }

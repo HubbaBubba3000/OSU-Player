@@ -10,8 +10,8 @@
         <Grid>
             <Slider Margin="10" Height="20" VerticalAlignment="Top"></Slider>
             
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Play}"
-                    Height="80" Width="80" Content="|>" Style="{StaticResource BtnStyle}" />
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding TooglePlayAndPause}"
+                    Height="80" Width="80" Content="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BtnStyle}" />
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150,0,0,0"
                     Height="50" Width="50" Content="→" Style="{StaticResource BtnStyle}" />
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,150,0" 

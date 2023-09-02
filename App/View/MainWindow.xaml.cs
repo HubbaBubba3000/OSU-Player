@@ -1,4 +1,4 @@
-﻿
+﻿using OSU_Player.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,10 +9,10 @@ namespace OSU_Player
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowVM mainvm)
         {
+            DataContext = mainvm;
             InitializeComponent();
-            
         }
 
 

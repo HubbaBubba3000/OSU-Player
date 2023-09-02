@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using OSU_Player.Data;
 using OSU_Player.Core;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace OSU_Player.ViewModel {
     public class MainPageVM : BaseVM {
@@ -26,7 +27,7 @@ namespace OSU_Player.ViewModel {
             }
         
         }
-            
+
         public MainPageVM(DBParser db, Player player) {
             list = db.beatmaps().ToList();
             this.player = player;

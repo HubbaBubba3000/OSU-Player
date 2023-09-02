@@ -11,15 +11,14 @@ namespace OSU_Player.Core {
                 audioEngine.CreateStream(_beatmap.FileName, config.Volume);
             }
         }
-        AudioEngine audioEngine;
-        public Player(AudioEngine ae, DefaultConfig config) {
-            this.config = config;
+        public AudioEngine audioEngine;
+        public Player(AudioEngine ae) {
+            this.config = DefaultConfig.Default;
             audioEngine = ae;
         }
 
         public void TooglePlayAndPause() {
             if (_beatmap == null) return;
-            
             if (audioEngine.IsPlay) {
                 audioEngine.Pause();
             } else {

@@ -2,11 +2,19 @@ using OSU_Player.Core;
 using System.Windows.Input;
 namespace OSU_Player.ViewModel {
     public class ControlPanelVM : BaseVM {
-        AudioEngine audioEngine;
         Player player;
-        public ControlPanelVM(AudioEngine ae, Player player) {
-            audioEngine = ae;
+        public ControlPanelVM(Player player) {
             this.player = player;
+        }
+
+        public double Volume {
+            get {
+                return player.audioEngine.Volume;
+            }
+            set {
+                player.audioEngine.Volume = value;
+                OnPropertyChanged("Volume");
+            }
         }
 
         public ICommand TooglePlayAndPause {
