@@ -8,7 +8,7 @@ namespace OSU_Player.Core {
             get {return _beatmap;}
             set {
                 _beatmap = value;
-                audioEngine.CreateStream(_beatmap.FileName, config.Volume);
+                audioEngine.CreateStream(_beatmap.FolderPath + "/" +_beatmap.FileName, config.Volume);
             }
         }
         public AudioEngine audioEngine;

@@ -1,15 +1,14 @@
 using ManagedBass;
-using Microsoft.Extensions.Logging;
 
 namespace OSU_Player.Core {
     public class AudioEngine {
 
-        public double Volume {
+        public int Volume {
             get {
-                return Bass.GlobalStreamVolume / 100;
+                return Bass.GlobalStreamVolume ;
             }
             set {
-                Bass.GlobalStreamVolume = (int)(value*100);
+                Bass.GlobalStreamVolume = value;
             }
         }
         public double Position {
@@ -30,10 +29,15 @@ namespace OSU_Player.Core {
                 else return 0;
             }
         }
+        public string LastError {
+            get {
+                return Bass.LastError.ToString();
+            }
+        }
         public bool IsPlay;
 
-        int stream;
-        string audioFile {
+         public int stream;
+        public string audioFile {
             get {
                 if (stream != 0) {
                     return Bass.ChannelGetInfo(stream).FileName;
@@ -42,7 +46,7 @@ namespace OSU_Player.Core {
             }
         }
 
-        int Output {
+        public int Output {
             get {
                 if (stream != 0) {
                    return Bass.ChannelGetDevice(stream);
@@ -54,10 +58,10 @@ namespace OSU_Player.Core {
             Bass.Init();
         }
 
-        public void CreateStream(string file, double volume) {
+        public void CreateStream(string file, int volume) {
             stream = Bass.CreateStream(file);
             
-            Bass.GlobalStreamVolume = (int)(volume*100);
+            Volume = volume;
             
         }
         public void Play() {

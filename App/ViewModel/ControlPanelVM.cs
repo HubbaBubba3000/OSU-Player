@@ -7,7 +7,7 @@ namespace OSU_Player.ViewModel {
             this.player = player;
         }
 
-        public double Volume {
+        public int Volume {
             get {
                 return player.audioEngine.Volume;
             }

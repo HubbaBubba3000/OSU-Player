@@ -13,16 +13,24 @@
     <Border CornerRadius="15,15,0,0" Background="{StaticResource b4}" 
             MouseDown="MoveWindow" Padding="4">
     <Grid>
-        <Label Content="OSU!Player" HorizontalAlignment="Left" Style="{StaticResource Logo}"
-               x:Name="Logo" />
+        <Label Content="OSU!Player" HorizontalAlignment="Left" Style="{StaticResource Logo}" x:Name="Logo" />
 
         <StackPanel Height="30" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Content="_" Width="30" Style="{StaticResource BtnStyle}"
-                    Click="ButtonCut" ToolTip="Cut"/>
+            <Button Width="30" Style="{StaticResource BtnStyle}" Click="ButtonCut" ToolTip="Cut">
+                <Path Width="30" Height="30" Stretch="Fill" 
+                        Fill="{StaticResource b3}" Data="{StaticResource MinimizeIcon}"/>
+            </Button>
+
             <Button Content="П" Width="30" Style="{StaticResource BtnStyle}"
-                    Click="ButtonMiniPlayer" ToolTip="MiniPlayer"/>
-            <Button Content="X" Width="30" Style="{StaticResource BtnStyle}"
-                    Click="ButtonExit"/>
+                    Click="ButtonMiniPlayer" ToolTip="MiniPlayer" >
+                <!-- <Path Width="50" Height="50" Stretch="Fill" 
+                        Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>     -->
+            </Button>
+            <Button Width="30" Style="{StaticResource BtnStyle}"
+                    Click="ButtonExit">
+                <Path  Width="30" Height="30" Stretch="Fill" 
+                          Fill="{StaticResource b3}" Data="{StaticResource ExitIcon}"/>
+            </Button>
         </StackPanel>
     </Grid>
     </Border>

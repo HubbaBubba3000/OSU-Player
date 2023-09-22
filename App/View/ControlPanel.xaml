@@ -11,11 +11,20 @@
             <Slider Margin="10" Height="20" VerticalAlignment="Top"></Slider>
             
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding TooglePlayAndPause}"
-                    Height="80" Width="80" Content="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BtnStyle}" />
+                    Height="80" Width="80" Style="{StaticResource BtnStyle}" >
+                    <Path  Width="70" Height="70" Stretch="Fill" 
+                          Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
+            </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150,0,0,0"
-                    Height="50" Width="50" Content="→" Style="{StaticResource BtnStyle}" />
+                    Height="50" Width="50" Style="{StaticResource BtnStyle}" >
+                <Path Width="40" Height="40" Stretch="Fill" 
+                          Fill="{StaticResource b3}" Data="{StaticResource NextIcon}"/>
+            </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,150,0" 
-                    Height="50" Width="50" Content="←" Style="{StaticResource BtnStyle}" />
+                    Height="50" Width="50" Style="{StaticResource BtnStyle}" >
+                    <Path  Width="40" Height="40" Stretch="Fill" 
+                          Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
+            </Button>
         </Grid>
     </Border>
 </UserControl>
