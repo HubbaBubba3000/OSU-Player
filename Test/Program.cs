@@ -1,19 +1,17 @@
-﻿using OSU_Player.Core;
-
+﻿using OSU_Player.Data;
 namespace OSU_Player.Test {
+
+    //----------Tests List--------------//
+    //AudioEngine - OK
+    //ThemeColor - Ok
+    //----------------------------------//
+
     public class Test {
 
-        public static void Main(string[] args) {
-            var audio = new AudioEngine();
 
-            audio.CreateStream("dataset/calamity.mp3", 1000);
-            audio.Play();
-            if (audio.IsPlay) {
-                Console.WriteLine(audio.Output);
-                Console.WriteLine("audio is play");
-            }
-            //wait
-            Console.ReadLine();
+        public static void Main(string[] args) {
+            var theme = JsonParser<ThemeConfig>.TryParse("Configs/Theme.json");
+            Console.WriteLine(theme.Colors[1].ToString()); 
         }
     }
 }

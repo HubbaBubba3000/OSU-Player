@@ -17,6 +17,16 @@ namespace OSU_Player.ViewModel {
             }
         }
 
+        public double Position {
+            get {
+                return player.audioEngine.Position;
+            }
+            set {
+                player.audioEngine.Position = value;
+                OnPropertyChanged("Position");
+            }
+        }
+
         public ICommand TooglePlayAndPause {
             get {
                 return new RelayCommand((obj) => { player.TooglePlayAndPause(); });

@@ -21,6 +21,10 @@ namespace OSU_Player
         public static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
+                .ConfigureLogging (logging => {
+                    logging.AddEventLog();
+                    logging.SetMinimumLevel(LogLevel.Information);
+                })
                 .ConfigureServices( service => {
 
                     service.AddSingleton<AudioEngine>();
@@ -30,10 +34,6 @@ namespace OSU_Player
                     service.AddSingleton<MainWindowVM>();
 
                     service.AddSingleton<MainWindow>();
-                })
-                .ConfigureLogging (logging => {
-                    logging.AddEventLog();
-                    logging.SetMinimumLevel(LogLevel.Information);
                 })
                 ;
         }

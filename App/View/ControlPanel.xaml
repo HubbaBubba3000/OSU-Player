@@ -8,7 +8,8 @@
             mc:Ignorable="d" d:DesignHeight="150" d:DesignWidth="400">
     <Border CornerRadius="0,0,15,15" Background="{StaticResource b4}" Height="150">
         <Grid>
-            <Slider Margin="10" Height="20" VerticalAlignment="Top"></Slider>
+            <Slider Margin="10" Height="20" VerticalAlignment="Top" Style="{StaticResource SliderStyle}" Orientation="Horizontal"
+                    Value="{Binding Position, UpdateSourceTrigger=PropertyChanged}"/>
             
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding TooglePlayAndPause}"
                     Height="80" Width="80" Style="{StaticResource BtnStyle}" >
@@ -22,8 +23,17 @@
             </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,150,0" 
                     Height="50" Width="50" Style="{StaticResource BtnStyle}" >
-                    <Path  Width="40" Height="40" Stretch="Fill" 
-                          Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
+                <Path  Width="40" Height="40" Stretch="Fill" 
+                        Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
+            </Button>
+
+            <Slider Margin="10,0,0,30" HorizontalAlignment="Left" VerticalAlignment="bottom" Orientation="Vertical"
+                    Style="{StaticResource SliderStyle}" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10"
+                    Height="20" Width="20" Style="{StaticResource BtnStyle}" >
+                <Path  Width="15" Height="15" Stretch="Fill" 
+                        Fill="{StaticResource b3}" Data="{StaticResource VolumeIcon}"/>
             </Button>
         </Grid>
     </Border>

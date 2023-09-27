@@ -22,4 +22,8 @@
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
 
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Configs/Default.json" CopyToOutputDirectory="Always" />
+    <None Update="Configs/Theme.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 </Project>

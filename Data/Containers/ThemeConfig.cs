@@ -3,14 +3,14 @@
 namespace OSU_Player.Data {
 
     public class ThemeConfig : IConfig {
-        public string[]? Colors {get;set;}
+        public ThemeColor[]? Colors {get;set;}
 
         public static ThemeConfig Default => new ThemeConfig() {
-            Colors = new string[] {
-                "#111111",
-                "#111111",
-                "#111111",
-                "#111111"
+            Colors = new ThemeColor[] {
+                new ThemeColor{R=0, G=123, B=123},
+                new ThemeColor{R=0, G=123, B=123},
+                new ThemeColor{R=0, G=123, B=123},
+                new ThemeColor{R=0, G=123, B=123}
             }
         };
     }

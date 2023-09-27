@@ -1,4 +1,5 @@
 using ManagedBass;
+using Microsoft.Extensions.Logging;
 
 namespace OSU_Player.Core {
     public class AudioEngine {
@@ -18,6 +19,9 @@ namespace OSU_Player.Core {
                         Bass.ChannelGetPosition(stream, PositionFlags.Relative));
                 }
                 else return 0;
+            }
+            set {
+                Bass.ChannelSetPosition(stream, Bass.ChannelSeconds2Bytes(stream, value));
             }
         }
         public double Length {
