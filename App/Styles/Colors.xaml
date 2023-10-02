@@ -1,17 +1,16 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OSU_Player"
-                    xmlns:class="OSU_Player.ResourceColors"
                     xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
-    <!-- <Color x:Key="c1">#dc98a4</Color>
+    <Color x:Key="c1">#dc98a4</Color>
     <Color x:Key="c2">#c13d50</Color>
     <Color x:Key="c3">#5c9d9f</Color>
     <Color x:Key="c4">#35324c</Color>
     <Color x:Key="c5">#c3cad8</Color>
--->
-    <SolidColorBrush Color="{Binding C1}" x:Key="b1" options:Freeze="True"/>
-    <SolidColorBrush Color="{Binding C2}" x:Key="b2" options:Freeze="True"/>
-    <SolidColorBrush Color="{Binding C3}" x:Key="b3" options:Freeze="True"/>
-    <SolidColorBrush Color="{Binding C4}" x:Key="b4" options:Freeze="True"/>
-    <SolidColorBrush Color="{Binding C5}" x:Key="b5" options:Freeze="True"/> 
+
+    <SolidColorBrush Color="{StaticResource c1}" x:Key="b1" options:Freeze="True"/>
+    <SolidColorBrush Color="{StaticResource c2}" x:Key="b2" options:Freeze="True"/>
+    <SolidColorBrush Color="{StaticResource c3}" x:Key="b3" options:Freeze="True"/>
+    <SolidColorBrush Color="{StaticResource c4}" x:Key="b4" options:Freeze="True"/>
+    <SolidColorBrush Color="{StaticResource c5}" x:Key="b5" options:Freeze="True"/> 
 </ResourceDictionary>

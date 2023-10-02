@@ -24,5 +24,9 @@ namespace OSU_Player.Data {
                 return (TConfig)IConfig.Default;
             }
         }
+
+        public void Dispose() {
+            // dispose
+        }
     }
 }

@@ -7,21 +7,28 @@
             xmlns:vm="clr-namespace:OSU_Player.ViewModel" 
             mc:Ignorable="d" d:DesingHeight="400" >
     <Grid>
-        <ListBox Height="400" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-        ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" 
-        SelectedItem="{Binding Current, UpdateSourceTrigger=PropertyChanged}"
-        ItemContainerStyle="{StaticResource ItemStyle}" Style="{StaticResource ListStyle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Name}" FontSize="18" 
-                            HorizontalAlignment="Left" Margin="0"/>
-                        <Label Content="{Binding Artist}" FontSize="12" 
-                            HorizontalAlignment="Left" Margin="0"/>
-                    </StackPanel> 
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Border >
+        <Border.Background>
+            <ImageBrush ImageSource="{Binding Background, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+        </Border.Background>
+            <ListBox Height="400" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" 
+                Background="Transparent"
+                SelectedItem="{Binding Current, UpdateSourceTrigger=PropertyChanged}"
+                ItemContainerStyle="{StaticResource ItemStyle}" Style="{StaticResource ListStyle}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding Name}" FontSize="18" 
+                                HorizontalAlignment="Left" Margin="0"/>
+                            <Label Content="{Binding Artist}" FontSize="12" 
+                                HorizontalAlignment="Left" Margin="0"/>
+                        </StackPanel> 
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+       
     </Grid>
 
 </UserControl>

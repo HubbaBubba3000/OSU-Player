@@ -15,7 +15,7 @@ namespace OSU_Player.Data {
                 Artist = b.Artist,
                 FileName = b.FileName,
                 length = b.DrainTime.Milliseconds,
-                FolderPath = path + b.FolderName,
+                FolderPath = Path.Combine(path,"Songs", b.FolderName),
                 Name = b.Title
             };
         }

@@ -5,14 +5,13 @@ using OSU_Player.Data;
 namespace OSU_Player.ViewModel {
     public class MainWindowVM : BaseVM {
 
-         HeaderVM header {get; set;}
-         ControlPanelVM control {get; set;}
-         MainPageVM page {get; set;}
-        public MainWindowVM(DBParser db, Player player) {
-            header = new HeaderVM();
-            control = new ControlPanelVM(player);
-            page = new MainPageVM(db, player);
-
+        public HeaderVM header {get; set;}
+        public  ControlPanelVM control {get; set;}
+        public  MainPageVM page {get; set;}
+        public MainWindowVM(HeaderVM header, ControlPanelVM control, MainPageVM page) {
+            this.control = control;
+            this.header = header;
+            this.page = page;
         }
         
     }

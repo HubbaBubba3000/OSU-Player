@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using OSU_Player.Data;
 using OSU_Player.Core;
 using OSU_Player.ViewModel;
@@ -18,6 +19,7 @@ namespace OSU_Player
         public App() {
             host = CreateHostBuilder().Build();
         }
+
         public static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
@@ -32,11 +34,14 @@ namespace OSU_Player
                     service.AddSingleton<Player>();
 
                     service.AddSingleton<MainWindowVM>();
+                    service.AddSingleton<HeaderVM>();
+                    service.AddSingleton<MainPageVM>();
+                    service.AddSingleton<ControlPanelVM>();
 
                     service.AddSingleton<MainWindow>();
                 })
                 ;
-        }
+        }  
         private void OnStartup(object? sender, StartupEventArgs e) {
             
             host.Start();
