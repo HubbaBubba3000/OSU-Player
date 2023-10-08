@@ -8,6 +8,7 @@ namespace OSU_Player.Data {
         public int length {get; set;} = 0;
 
         public string FileName {get; set;} = string.Empty;
+        public string AudioFile {get; set;} = string.Empty;
 
         public string FolderPath {get; set;} = string.Empty;
     }

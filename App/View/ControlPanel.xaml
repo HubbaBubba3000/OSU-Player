@@ -3,18 +3,38 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
             xmlns:local="clr-namespace:OSU_Player.View" 
             xmlns:vm="clr-namespace:OSU_Player.ViewModel" 
             mc:Ignorable="d" d:DesignHeight="150" d:DesignWidth="400">
     <Border CornerRadius="0,0,15,15" Background="{StaticResource b4}" Height="150">
         <Grid>
-            <Slider Margin="10" Height="20" VerticalAlignment="Top" Style="{StaticResource SliderStyle}" Orientation="Horizontal"
-                    Value="{Binding Position, UpdateSourceTrigger=PropertyChanged}"/>
+            <Slider Margin="10" Height="20" VerticalAlignment="Top" 
+                    Minimum="0" Maximum="{Binding Length, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource SliderStyle}" Orientation="Horizontal" 
+                    Value="{Binding Position, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Thumb.DragStarted">
+                        <i:InvokeCommandAction Command="{Binding DragSrart}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Thumb.DragCompleted">
+                        <i:InvokeCommandAction Command="{Binding DragEnd}" CommandParameter="{Binding ElementName=track,Path=Value}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"     
+                        Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
+                        Text="{Binding TimePosition, StringFormat={}{0:mm':'ss}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" 
+                        Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
+                        Text="{Binding TimeLength, StringFormat={}{0:mm':'ss}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding TooglePlayAndPause}"
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Command="{Binding TooglePlayAndPause, UpdateSourceTrigger=PropertyChanged}"
                     Height="80" Width="80" Style="{StaticResource BtnStyle}" >
-                    <Path  Width="70" Height="70" Stretch="Fill" 
-                          Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
+                <Path Width="70" Height="70" Stretch="Fill" 
+                      Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
             </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150,0,0,0"
                     Height="50" Width="50" Style="{StaticResource BtnStyle}" >
@@ -27,8 +47,18 @@
                         Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
             </Button>
 
-            <Slider Margin="10,0,0,30" HorizontalAlignment="Left" VerticalAlignment="bottom" Orientation="Vertical"
-                    Style="{StaticResource SliderStyle}" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" />
+            <Slider Margin="15,0,0,40" HorizontalAlignment="Left" VerticalAlignment="bottom" Orientation="Vertical"
+                    Style="{StaticResource SliderStyle}" Height="80" Minimum="0" Maximum="10000"
+                    Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" >
+                    <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Thumb.DragStarted">
+                        <i:InvokeCommandAction Command="{Binding DragSrart}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Thumb.DragCompleted">
+                        <i:InvokeCommandAction Command="{Binding DragEnd}" CommandParameter="{Binding ElementName=track,Path=Value}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
 
             <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10"
                     Height="20" Width="20" Style="{StaticResource BtnStyle}" >

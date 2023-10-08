@@ -15,6 +15,7 @@ namespace OSU_Player.Data {
         int length { get; }  
 
         string FileName { get; }
+        string AudioFile { get; }
 
         string FolderPath { get; }
 

@@ -5,10 +5,8 @@ namespace OSU_Player.Data {
     public class JsonParser<TConfig> where TConfig : IConfig {
 
         private static string jsonread(string file) {
-            using (var filestream = new StreamReader(file) ) {
-                var json = filestream.ReadToEnd();
-                return json;
-            }
+            using (var filestream = new StreamReader(file) ) 
+                return filestream.ReadToEnd();
         }
         public static TConfig? Parse(string conf) {
             return JsonSerializer.Deserialize<TConfig>(jsonread(conf));
@@ -25,8 +23,5 @@ namespace OSU_Player.Data {
             }
         }
 
-        public void Dispose() {
-            // dispose
-        }
     }
 }

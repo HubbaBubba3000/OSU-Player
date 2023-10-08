@@ -88,6 +88,8 @@ namespace OSU_Player.ViewModel {
         public MainPageVM(DBParser db, Player player) {
             list = db.beatmaps().ToList();
             this.player = player;
+            Background = new BitmapImage( new Uri( GetBG(list[0].FolderPath), UriKind.Relative));
+            this.player.currentBeatmap = list[0];
         }
     }
 }
