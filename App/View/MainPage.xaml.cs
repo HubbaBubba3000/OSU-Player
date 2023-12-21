@@ -3,7 +3,8 @@ using System.Windows;
 
 namespace OSU_Player.View {
     public partial class MainPage : UserControl {
-        public MainPage() {
+        public MainPage() { 
+
             InitializeComponent();
         }
     }

@@ -25,7 +25,6 @@ namespace OSU_Player
             return Host.CreateDefaultBuilder()
                 .ConfigureLogging (logging => {
                     logging.AddEventLog();
-                    logging.SetMinimumLevel(LogLevel.Information);
                 })
                 .ConfigureServices( service => {
 

@@ -33,7 +33,7 @@ namespace OSU_Player.Core {
             get {
                 if (stream != 0) {
                     return Bass.ChannelBytes2Seconds(stream,
-                        Bass.ChannelGetPosition(stream, PositionFlags.Bytes));
+                        Bass.ChannelGetPosition(stream));
                 }
                 else return 0;
             }
@@ -45,9 +45,13 @@ namespace OSU_Player.Core {
             get {
                 if (stream != 0) {
                     return Bass.ChannelBytes2Seconds(stream,
-                        Bass.ChannelGetLength(stream, PositionFlags.Bytes));
+                        Bass.ChannelGetLength(stream));
+                    logger.LogInformation(" ok : {err}", LastError);
                 }
-                else return 0;
+                else {
+                    logger.LogInformation("length error : {err}", LastError);
+                    return 0;
+                }
             }
         }
         public string LastError {
@@ -76,9 +80,9 @@ namespace OSU_Player.Core {
 
         public int Output {
             get {
-                int device;
+                int device = -2;
                 if (stream != 0) device = Bass.ChannelGetDevice(stream);
-                else device = -2; 
+
                 if (device == -1) logger.LogError("output device = -1 | {err}", LastError);
                 return device;
             }

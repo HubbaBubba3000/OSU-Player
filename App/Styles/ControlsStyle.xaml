@@ -9,6 +9,7 @@
 
     <Style x:Key="Logo" TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="./fonts/TorusPror.ttf#Torus Pro SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource b2}" />
     </Style>
 
@@ -42,14 +43,17 @@
 
     <Style x:Key="TextStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="./fonts/TorusPror.ttf#Torus Pro"/>
     </Style>
 
     <Style x:Key="ListStyle" TargetType="{x:Type ListBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
+
     <Style x:Key="ItemStyle" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Foreground" Value="{StaticResource b3}" />
+        <Setter Property="FontFamily" Value="./fonts/TorusPror.ttf#Torus Pro"/>
+         
     </Style>
 <!-- #Region SliderStyle -->
     <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">

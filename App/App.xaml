@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:OSU_Player"
              Startup="OnStartup">
     <Application.Resources>
-        <ResourceDictionary Source="Styles/ControlsStyle.xaml" />
+        <!-- <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary>
+                    <FontFamily x:Key="Torus">.\fonts\#Torus Pro SemiBold</FontFamily>
+                     <FontFamily x:Key="Torus-r">.\fonts\#Torus Pro </FontFamily>
+            </ResourceDictionary> -->
+            <ResourceDictionary Source="Styles/ControlsStyle.xaml" />
+        <!-- </ResourceDictionary.MergedDictionaries> -->
+
+
     </Application.Resources>
 </Application>

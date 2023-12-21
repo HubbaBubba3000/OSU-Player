@@ -8,62 +8,71 @@
             xmlns:vm="clr-namespace:OSU_Player.ViewModel" 
             mc:Ignorable="d" d:DesignHeight="150" d:DesignWidth="400">
     <Border CornerRadius="0,0,15,15" Background="{StaticResource b4}" Height="150">
-        <Grid>
+       <Grid>
             <Slider Margin="10" Height="20" VerticalAlignment="Top" 
                     Minimum="0" Maximum="{Binding Length, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource SliderStyle}" Orientation="Horizontal" 
                     Value="{Binding Position, UpdateSourceTrigger=PropertyChanged}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Thumb.DragStarted">
-                        <i:InvokeCommandAction Command="{Binding DragSrart}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="Thumb.DragCompleted">
-                        <i:InvokeCommandAction Command="{Binding DragEnd}" CommandParameter="{Binding ElementName=track,Path=Value}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
             </Slider>
-            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"     
-                        Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
-                        Text="{Binding TimePosition, StringFormat={}{0:mm':'ss}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,25,5,0" Style="{StaticResource TextStyle}" 
+                        Text="{Binding TimePosition, StringFormat={}{0:mm':'ss}, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" 
-                        Margin="0,20,0,0" Style="{StaticResource TextStyle}" 
-                        Text="{Binding TimeLength, StringFormat={}{0:mm':'ss}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,45,5,0" Style="{StaticResource TextStyle}" 
+                        Text="{Binding TimeLength, StringFormat={}{0:mm':'ss}, UpdateSourceTrigger=PropertyChanged}" />
             
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" 
                     Command="{Binding TooglePlayAndPause, UpdateSourceTrigger=PropertyChanged}"
                     Height="80" Width="80" Style="{StaticResource BtnStyle}" >
-                <Path Width="70" Height="70" Stretch="Fill" 
-                      Fill="{StaticResource b3}" Data="{StaticResource PlayIcon}"/>
+                <Path Width="70" Height="70" Stretch="Fill" Fill="{StaticResource b3}">
+                    <Path.Style>
+                        <Style TargetType="{x:Type Path}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsPlay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Data" Value="{StaticResource PauseIcon}"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsPlay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                    <Setter Property="Data" Value="{StaticResource PlayIcon}"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>      
+                </Path>
             </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150,0,0,0"
+                    Command="{Binding NextBeatmap, UpdateSourceTrigger=PropertyChanged}"
                     Height="50" Width="50" Style="{StaticResource BtnStyle}" >
                 <Path Width="40" Height="40" Stretch="Fill" 
                           Fill="{StaticResource b3}" Data="{StaticResource NextIcon}"/>
             </Button>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,150,0" 
+                    Command="{Binding PrevBeatmap, UpdateSourceTrigger=PropertyChanged}"
                     Height="50" Width="50" Style="{StaticResource BtnStyle}" >
                 <Path  Width="40" Height="40" Stretch="Fill" 
                         Fill="{StaticResource b3}" Data="{StaticResource PrevIcon}"/>
             </Button>
 
-            <Slider Margin="15,0,0,40" HorizontalAlignment="Left" VerticalAlignment="bottom" Orientation="Vertical"
+            <Slider Margin="15,0,0,20" HorizontalAlignment="Left" Orientation="Vertical"
                     Style="{StaticResource SliderStyle}" Height="80" Minimum="0" Maximum="10000"
-                    Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" >
-                    <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Thumb.DragStarted">
-                        <i:InvokeCommandAction Command="{Binding DragSrart}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="Thumb.DragCompleted">
-                        <i:InvokeCommandAction Command="{Binding DragEnd}" CommandParameter="{Binding ElementName=track,Path=Value}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Slider>
+                    Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" />
 
             <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10"
-                    Height="20" Width="20" Style="{StaticResource BtnStyle}" >
-                <Path  Width="15" Height="15" Stretch="Fill" 
-                        Fill="{StaticResource b3}" Data="{StaticResource VolumeIcon}"/>
+                    Height="20" Width="20" Style="{StaticResource BtnStyle}" Command="{Binding MuteAudio, UpdateSourceTrigger=PropertyChanged}">
+                <Path Height="15" Stretch="Fill" Fill="{StaticResource b3}">
+                    <Path.Style>
+                        <Style TargetType="{x:Type Path}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMute, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Data" Value="{StaticResource MutedIcon}" />
+                                    <Setter Property="Width" Value="10" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsMute, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                    <Setter Property="Width" Value="15" />
+                                    <Setter Property="Data" Value="{StaticResource VolumeIcon}" /> 
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>      
+                </Path>
             </Button>
         </Grid>
     </Border>

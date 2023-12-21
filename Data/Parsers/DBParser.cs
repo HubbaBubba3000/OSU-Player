@@ -6,8 +6,12 @@ namespace OSU_Player.Data {
         OsuDb osuDb;
         readonly string path;
         public DBParser() {
-            this.path = DefaultConfig.Default.OsuFolder;
+            this.path = JsonParser<DefaultConfig>.TryParse("Configs\\Default.json").OsuFolder;
             osuDb = OsuDb.ReadFromFile(path + "/osu!.db");
+        }
+
+        string fol(Coosu.Database.DataTypes.Beatmap b) {
+            return (b.FolderName.EndsWith(" ") ? b.FolderName.Remove(b.FolderName.Length-1) : b.FolderName);
         }
         
         public Beatmap BeatmapConverter(Coosu.Database.DataTypes.Beatmap b) {
@@ -15,9 +19,9 @@ namespace OSU_Player.Data {
                 Artist = b.Artist,
                 FileName = b.FileName,
                 length = b.DrainTime.Milliseconds,
-                FolderPath = Path.Combine(path,"Songs", b.FolderName),
+                FolderPath = Path.Combine(path,"Songs", fol(b) ),
                 Name = b.Title,
-                AudioFile = Path.Combine(path,"Songs", b.FolderName, b.AudioFileName)
+                AudioFile = Path.Combine(path,"Songs", fol(b), b.AudioFileName)
             };
         }
 

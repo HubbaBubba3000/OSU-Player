@@ -1,26 +1,39 @@
 using OSU_Player.Core;
 using System;
-using System.Windows.Diagnostics;
+using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Windows;
 namespace OSU_Player.ViewModel {
     public class ControlPanelVM : BaseVM {
         Player player;
-        // todo implement position timer
+        MainPageVM page;
         DispatcherTimer timer;
-        bool IsDrag = false;
-        public ControlPanelVM(Player player) {
+        ILogger<ControlPanelVM> logger;
+        public bool IsDrag = false;
+        public ControlPanelVM(Player player, MainPageVM page, ILogger<ControlPanelVM> logger) {
             this.player = player;
-            timer = new DispatcherTimer(TimeSpan.FromSeconds(0.5),DispatcherPriority.ApplicationIdle, new EventHandler(TimerHandler), Dispatcher.CurrentDispatcher);
-            timer.Start();
+            this.logger = logger;
+            this.page = page;
+            timer = new DispatcherTimer(TimeSpan.FromSeconds(1),DispatcherPriority.ApplicationIdle, new EventHandler(TimerHandler), Dispatcher.CurrentDispatcher);
+            //timer.Stop();
+        }
+        public bool IsPlay {
+            get {
+                return player.audioEngine.IsPlay;
+            }
+            set {
+                OnPropertyChanged("IsPlay");
+            }
         }
 
-        public void TimerHandler(object? sender, EventArgs e) {
-            if (player.audioEngine.IsPlay) {
-                Position = 0;
+        public void TimerHandler(object? sender, EventArgs e) {               
+            if (IsPlay) {
+              //  if (!IsDrag) 
+                    Position = player.audioEngine.Position;
+              //  logger.LogInformation("timer ");
 
-            }
-
+            }   
         }
 
         public int Volume {
@@ -29,7 +42,7 @@ namespace OSU_Player.ViewModel {
             }
             set {
                 IsMute = (value == 0);
-                    player.audioEngine.Volume = value;
+                player.audioEngine.Volume = value;
                 OnPropertyChanged("Volume");
             }
         }
@@ -49,7 +62,8 @@ namespace OSU_Player.ViewModel {
                 return player.audioEngine.Position;
             }
             set {
-                if (IsDrag) 
+               // if (IsDrag) 
+               if (player.audioEngine.Position != value)
                     player.audioEngine.Position = value;
 
                 TimePosition = TimeSpan.Zero;
@@ -58,10 +72,10 @@ namespace OSU_Player.ViewModel {
         }
         public TimeSpan TimePosition {
             get {
-                return TimeSpan.FromMilliseconds(Position);
+                return TimeSpan.FromSeconds(Position);
             }
             set {
-                OnPropertyChanged("Position");
+                OnPropertyChanged("TimePosition");
             }
         }
 
@@ -70,22 +84,44 @@ namespace OSU_Player.ViewModel {
                 return player.audioEngine.Length;
             }
             set {
-                TimeLength = TimeSpan.Zero;
+                TimeLength = TimeSpan.FromSeconds(value);
                 OnPropertyChanged("Length");
             }
         }
         public TimeSpan TimeLength {
             get {
-                return TimeSpan.FromMilliseconds(Length);
+                return TimeSpan.FromSeconds(Length);
             }
             set {
-                OnPropertyChanged("Length");
+                OnPropertyChanged("TimeLength");
             }
         }
-
+        public ICommand PrevBeatmap {
+            get {
+                return new RelayCommand ((obj) => {
+                    page.Current = page.List[page.List.IndexOf(player.currentBeatmap) - 1];
+                    Length = 0;
+                },
+                (obj) => ((page.List.IndexOf(player.currentBeatmap) > 0)));
+            }
+        }
+        public ICommand NextBeatmap {
+            get {
+                return new RelayCommand ((obj) => {
+                    page.Current = page.List[page.List.IndexOf(player.currentBeatmap) + 1];
+                    Length = 0;
+                },
+                (obj) => (page.List.IndexOf(player.currentBeatmap) < page.List.Count));
+            }
+        }
         public ICommand TooglePlayAndPause {
             get {
-                return new RelayCommand((obj) => { player.TooglePlayAndPause(); });
+                return new RelayCommand((obj) => { 
+                    player.TooglePlayAndPause();
+                    IsPlay = true;
+                    Length = player.audioEngine.Length;
+                    TimeLength = TimeSpan.Zero;
+                });
             }
         }
         public ICommand MuteAudio {
@@ -93,15 +129,22 @@ namespace OSU_Player.ViewModel {
                 return new RelayCommand((obj) => {IsMute = !IsMute; });
             }
         }
-        public ICommand DragStart {
-            get {
-                return new RelayCommand((obj) => { IsDrag = true; });
-            }
-        }
-        public ICommand DragEnd {
-            get {
-                return new RelayCommand((obj) => { IsDrag = false; });
-            }
-        }
+        
+        // public ICommand DragStart {
+        //     get {
+        //         return new RelayCommand((obj) => { 
+        //             IsDrag = true; 
+        //             logger.LogInformation("drag true");
+        //         });
+        //     }
+        // }
+        // public ICommand DragEnd {
+        //     get {
+        //         return new RelayCommand((obj) => { 
+        //             IsDrag = false; 
+        //             logger.LogInformation("drag false");
+        //         });
+        //     }
+        // }
     }
 }

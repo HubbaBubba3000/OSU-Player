@@ -90,6 +90,8 @@ namespace OSU_Player.ViewModel {
             this.player = player;
             Background = new BitmapImage( new Uri( GetBG(list[0].FolderPath), UriKind.Relative));
             this.player.currentBeatmap = list[0];
+            var c = JsonParser<DefaultConfig>.TryParse("../App/Configs/Default.json");
+            this.player.audioEngine.CreateStream(Path.Combine(Current.FolderPath, Current.AudioFile), c.Volume);
         }
     }
 }
